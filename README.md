@@ -8,9 +8,9 @@ libpopular finds the most commonly used packages and functions in Haskell projec
 1. git clone into a temporary directory
 1. find symbols in local repos
   1. use `haskell-names` package to resolve unqualified names
-  1. stack build
-  1. need a symbol list of imported libraries to make an `Environment` (`*.hi` or ghci's `:browse`?)
-  1. find package names by module names
+  1. crawl Hackage ~~stack build~~ (build failed due to local library dependencies)
+  1. need a symbol list of imported libraries to make an `Environment` ~~(`*.hi` `haskell-names`' `hs-gen-iface` or ghci's `:browse`?)~~
+  1. ~~find package names by module names~~
   1. handle version and renaming (`as`)
 1. clean up local repos
 1. print statistics
