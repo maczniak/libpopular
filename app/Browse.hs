@@ -72,9 +72,11 @@ cabalDependPackages cabalFile =
 
 packageList :: GenericPackageDescription -> [String]
 packageList pkgDesc =
-  foldr union [] $
-    libraryPkgs ++ executablePkgs ++ testSuitePkgs ++ benchmarkPkgs
-  where libraryPkgs = map (readBuildInfo . libBuildInfo . condTreeData) $
+  delete myOwn $
+    foldr union [] $
+      libraryPkgs ++ executablePkgs ++ testSuitePkgs ++ benchmarkPkgs
+  where myOwn = unPackageName $ pkgName $ package $ packageDescription pkgDesc
+        libraryPkgs = map (readBuildInfo . libBuildInfo . condTreeData) $
                           maybeToList (condLibrary pkgDesc)
         executablePkgs = map (get buildInfo) $ condExecutables pkgDesc
         testSuitePkgs  = map (get testBuildInfo) $ condTestSuites pkgDesc
